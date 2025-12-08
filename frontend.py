@@ -6,7 +6,6 @@ if "conversation_agent" not in streamlit.session_state :
 
 
 def init_header():
-	# initialisation de la page
 	streamlit.set_page_config(page_title="Jarvis", page_icon="🤖")
 	streamlit.title("🤖 Jarvis ton baron préféré !")
 	streamlit.write("Il est un peu enervé, fais attention à ce que tu racontes...")
@@ -27,6 +26,8 @@ def user_interface():
 	if user_input:
 		streamlit.session_state.conversation_agent.ask_llm(user_interaction=user_input)
 		show_discussion_history()
+
+
 
 if __name__ == "__main__":
 	user_interface()
