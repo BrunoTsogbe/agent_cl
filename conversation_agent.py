@@ -62,8 +62,6 @@ class ConversationAgent:
 
 
 
-
-
 if __name__ == "__main__":
     conversation_agent = ConversationAgent()
     conversation_agent.terminal_user_interface()
