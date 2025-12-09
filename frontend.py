@@ -26,6 +26,7 @@ def show_discussion_history(history_placeholder):
 def user_interface():
 	init_header()
 	history_placeholder = streamlit.empty() 
+	show_discussion_history(history_placeholder)
 	with streamlit.container():
 		
 		user_input = streamlit.chat_input("N'oublie pas à qui tu parle !")
@@ -36,9 +37,7 @@ def user_interface():
 
 		if user_input:
 			streamlit.session_state.conversation_agent.ask_llm(user_interaction=user_input, model=selected_model)
-
-
-	show_discussion_history(history_placeholder)
+			show_discussion_history(history_placeholder)
 
 
 
