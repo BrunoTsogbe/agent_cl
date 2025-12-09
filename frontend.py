@@ -14,26 +14,31 @@ def init_header():
 
 
 
-def show_discussion_history():
-	for message in streamlit.session_state.conversation_agent.history:
-		if message["role"] != "system":
-			with streamlit.chat_message(message["role"]):
-				streamlit.write(message["content"])
-
+def show_discussion_history(history_placeholder):
+	container = history_placeholder.container()
+	with container:
+		for message in streamlit.session_state.conversation_agent.history:
+			if message["role"] != "system":
+				with streamlit.chat_message(message["role"]):
+					streamlit.write(message["content"])
 
 
 def user_interface():
 	init_header()
+	history_placeholder = streamlit.empty() 
 	with streamlit.container():
+		
 		user_input = streamlit.chat_input("N'oublie pas à qui tu parle !")
 		_, col2 = streamlit.columns([2, 1])
 		with col2:
 			streamlit.empty()
 			selected_model = streamlit.selectbox("Choisis ton modèle gamin...", LLM_MODELS)
 
-	if user_input:
-		streamlit.session_state.conversation_agent.ask_llm(user_interaction=user_input, model=selected_model)
-		show_discussion_history()
+		if user_input:
+			streamlit.session_state.conversation_agent.ask_llm(user_interaction=user_input, model=selected_model)
+
+
+	show_discussion_history(history_placeholder)
 
 
 
